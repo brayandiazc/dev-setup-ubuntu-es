@@ -3,7 +3,7 @@ set -e
 
 # Script para instalar Java (JDK) y Maven con SDKMAN!
 # Autor: Brayan Diaz C
-# Fecha: 21 jun 2025
+# Fecha: 25 jun 2025
 
 echo "☕ Iniciando instalación de Java (JDK) y Maven usando SDKMAN..."
 
@@ -53,19 +53,27 @@ done
 echo "🔄 [3/10] Aplicando configuración temporal..."
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
-# 5. Mostrar versiones de Java disponibles
+# 5. Listar versiones de Java disponibles (evitar pager)
 echo "📜 [4/10] Listando versiones de Java disponibles..."
+export SDKMAN_LESS=false
 sdk list java | grep -E 'tem.*-lts' | grep -v -E 'ea|rc|fx'
 
-# 6. Obtener y seleccionar versión
+# 6. Solicitar versión con ayuda visual
 latest_lts=$(sdk list java | grep -E 'tem.*-lts' | grep -v -E 'ea|rc|fx' | head -1 | awk '{print $NF}')
-read_prompt "👉 ¿Qué versión de Java deseas instalar? (ENTER para instalar la última LTS: $latest_lts): " java_version
+
+echo
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+echo "🎯 ¡Atención! Se detectó que la última versión LTS disponible es: $latest_lts"
+echo "📌 Puedes escribir algo como: '17.0.10-tem' o presionar ENTER para instalar esta versión automáticamente."
+echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+read_prompt "¿Qué versión de Java deseas instalar?: " java_version
+echo
 
 if [[ -z "$java_version" ]]; then
   java_version=$latest_lts
-  echo "🔁 No se ingresó ninguna versión. Se instalará la LTS: $java_version"
+  echo "🔁 No se ingresó ninguna versión. Se instalará: $java_version"
 else
-  echo "📥 Se instalará Java $java_version"
+  echo "📥 Se instalará Java $java_version según tu elección."
 fi
 
 # 7. Instalar Java
@@ -88,5 +96,7 @@ echo "🛠️ [8/10] Para actualizar SDKMAN en el futuro:"
 echo "sdk update"
 echo "sdk upgrade"
 
+# 11. Mensaje final
 echo
 echo "🎉 [9/10] Java ($java_version) y Maven han sido instalados correctamente usando SDKMAN."
+echo "🔁 Puedes cerrar y abrir la terminal o ejecutar: exec \$SHELL"
