@@ -55,19 +55,19 @@ git config --global init.defaultBranch main
 echo "📝 [6/8] Configuración opcional de plantilla de mensaje de commit..."
 read -p "¿Deseas usar una plantilla de mensajes de commit recomendada? (y/n): " usar_plantilla
 if [ "$usar_plantilla" = "y" ]; then
-    echo "📥 Descargando plantilla desde GitHub..."
-    curl -fsSL https://raw.githubusercontent.com/brayandiazc/gitmessage-template-es/main/.gitmessage -o ~/.gitmessage
-    git config --global commit.template ~/.gitmessage
-    echo "📄 Plantilla configurada. Este es su contenido:"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    cat ~/.gitmessage
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo
-    echo "🧠 Recuerda que esta plantilla se abrirá cada vez que ejecutes:"
-    echo "   git commit"
-    echo "Y deberás escribir tu mensaje debajo de las instrucciones visibles."
+  echo "📥 Descargando plantilla desde GitHub..."
+  curl -fsSL https://raw.githubusercontent.com/brayandiazc/gitmessage-template-es/main/.gitmessage -o ~/.gitmessage
+  git config --global commit.template ~/.gitmessage
+  echo "📄 Plantilla configurada. Este es su contenido:"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  cat ~/.gitmessage
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo
+  echo "🧠 Recuerda que esta plantilla se abrirá cada vez que ejecutes:"
+  echo "   git commit"
+  echo "Y deberás escribir tu mensaje debajo de las instrucciones visibles."
 else
-    echo "❌ Plantilla no configurada. Puedes añadirla manualmente más tarde si lo deseas."
+  echo "❌ Plantilla no configurada. Puedes añadirla manualmente más tarde si lo deseas."
 fi
 
 # 7. Mostrar configuración actual usando cat
