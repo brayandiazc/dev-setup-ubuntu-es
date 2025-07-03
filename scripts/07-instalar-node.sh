@@ -1,22 +1,18 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 set -e
 
 # Script para instalar y configurar Node.js en Ubuntu con nodenv
 # Autor: Brayan Diaz C
-# Fecha: 24 jun 2025
+# Fecha: 25 jun 2025
 
 echo "🟢 Iniciando el proceso de instalación y configuración de Node.js con nodenv..."
 
-# Función de lectura compatible con Zsh y Bash
+# Función de lectura compatible con Bash y Zsh
 read_prompt() {
   local __msg="$1"
   local __varname="$2"
-  if [[ -n "$ZSH_VERSION" ]]; then
-    echo -n "$__msg"
-    read "$__varname"
-  else
-    read -p "$__msg" "$__varname"
-  fi
+  echo -n "$__msg"
+  read "$__varname"
 }
 
 # 1. Instalar dependencias necesarias
@@ -36,13 +32,11 @@ else
   git clone https://github.com/nodenv/nodenv.git ~/.nodenv
 fi
 
-# 3. Añadir configuración a archivos de entorno
+# 3. Configurar entorno en .bashrc, .zshrc, .profile y .zprofile
 echo "🧩 [2/10] Agregando configuración de nodenv a archivos de entorno..."
-
 for config_file in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile" "$HOME/.zprofile"; do
-  if [ ! -f "$config_file" ]; then
-    touch "$config_file"
-  fi
+  [ ! -f "$config_file" ] && touch "$config_file"
+
   if ! grep -q 'nodenv init' "$config_file"; then
     {
       echo ''
@@ -72,7 +66,7 @@ else
 fi
 
 # 6. Mostrar algunas versiones disponibles
-echo "📜 [5/10] Estas son algunas versiones recientes de Node.js disponibles:"
+echo "📜 [5/10] Algunas versiones recientes de Node.js disponibles:"
 nodenv install -l | grep -E '^\s*[0-9]+\.[0-9]+\.[0-9]+$' | tail -n 20
 
 # 7. Solicitar versión con ayuda visual
@@ -83,7 +77,7 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 echo "🎯 Última versión estable detectada de Node.js: $node_latest"
 echo
 echo "🧠 Puedes escribir una versión específica como: 20.12.2"
-echo "👉 O simplemente presiona ENTER para instalar la última versión estable mostrada arriba."
+echo "👉 O simplemente presiona ENTER para instalar la última versión mostrada arriba."
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read_prompt "¿Qué versión de Node.js deseas instalar?: " node_version
 echo
@@ -105,13 +99,12 @@ echo "🔍 [7/10] Verificando instalación..."
 node -v
 npm -v
 
-# 10. Instrucciones para actualizar en el futuro
-echo "🛠️ [8/10] Para actualizar nodenv y node-build:"
+# 10. Instrucciones futuras
+echo "🛠️ [8/10] Para actualizar nodenv y node-build en el futuro:"
 echo "cd ~/.nodenv && git pull"
 echo "cd \"\$(nodenv root)/plugins/node-build\" && git pull"
 
 # 11. Recargar terminal
 echo
 echo "🔄 Recargando terminal para aplicar cambios..."
-echo "💡 Una vez reiniciado, puedes verificar con: node -v"
-exec $SHELL
+exec "$SHELL"
