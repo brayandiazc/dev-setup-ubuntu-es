@@ -3,7 +3,7 @@ set -e
 
 # Script para generar y configurar claves SSH para Git y GitHub
 # Autor: Brayan Diaz C
-# Fecha: 24 jun 2025
+# Fecha: 25 jun 2025
 
 echo "🔐 Iniciando el proceso de generación y configuración de claves SSH para GitHub..."
 
@@ -39,23 +39,18 @@ ssh-add ~/.ssh/id_rsa
 
 # 5. Copiar clave pública al portapapeles
 echo "📋 [5/7] Copiando la clave pública al portapapeles..."
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  if command -v xclip &> /dev/null; then
-    xclip -sel clip < ~/.ssh/id_rsa.pub
-  else
-    echo "📦 xclip no está instalado. Instalándolo..."
-    sudo apt install xclip -y
-    xclip -sel clip < ~/.ssh/id_rsa.pub
-  fi
+if command -v xclip &>/dev/null; then
+  xclip -sel clip < ~/.ssh/id_rsa.pub
+  echo "✅ Clave copiada al portapapeles."
 elif [[ "$OSTYPE" == "darwin"* ]]; then
   pbcopy < ~/.ssh/id_rsa.pub
+  echo "✅ Clave copiada al portapapeles (macOS)."
 else
-  echo "⚠️ Sistema no compatible con portapapeles automático."
-  echo "Aquí está tu clave pública:"
+  echo "⚠️ No se pudo copiar automáticamente. Aquí está tu clave pública:"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
   cat ~/.ssh/id_rsa.pub
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 fi
-
-echo "✅ Clave copiada al portapapeles (si es compatible)."
 
 # 🔔 Separador visual para indicar tarea manual del usuario
 echo
@@ -73,6 +68,7 @@ echo "3. Asigna un título como: $ssh_comment"
 echo "4. Haz clic en 'Add SSH key'."
 
 # 7. Probar conexión
+echo
 echo "🔗 [7/7] Verificando conexión SSH con GitHub..."
 ssh -T git@github.com || true
 
