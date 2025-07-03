@@ -1,22 +1,18 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 set -e
 
 # Script para instalar y configurar Ruby en Ubuntu con rbenv
 # Autor: Brayan Diaz C
-# Fecha: 24 jun 2025
+# Fecha: 25 jun 2025
 
 echo "💎 Iniciando el proceso de instalación y configuración de Ruby con rbenv..."
 
-# Función reutilizable para leer entradas compatible con zsh y bash
+# Función reutilizable para leer entradas compatible con bash y zsh
 read_prompt() {
   local __msg="$1"
   local __varname="$2"
-  if [[ -n "$ZSH_VERSION" ]]; then
-    echo -n "$__msg"
-    read "$__varname"
-  else
-    read -p "$__msg" "$__varname"
-  fi
+  echo -n "$__msg"
+  read "$__varname"
 }
 
 # 1. Actualizar sistema y dependencias
@@ -39,13 +35,12 @@ else
   git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 fi
 
-# 3. Configurar entorno en .bashrc, .zshrc, .profile y .zprofile
-echo "🧩 [2/10] Añadiendo configuración a los archivos de entorno..."
+# 3. Configurar entorno
+echo "🧩 [2/10] Añadiendo configuración a archivos de entorno..."
 
 for config_file in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile" "$HOME/.zprofile"; do
-  if [ ! -f "$config_file" ]; then
-    touch "$config_file"
-  fi
+  [ ! -f "$config_file" ] && touch "$config_file"
+
   if ! grep -q 'rbenv init' "$config_file"; then
     {
       echo ''
@@ -67,7 +62,7 @@ eval "$(rbenv init -)"
 export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"
 
 # 5. Instalar ruby-build
-echo "🔧 [4/10] Instalando ruby-build para rbenv..."
+echo "🔧 [4/10] Instalando ruby-build..."
 if [ ! -d "$(rbenv root)/plugins/ruby-build" ]; then
   git clone https://github.com/rbenv/ruby-build.git "$(rbenv root)/plugins/ruby-build"
 else
@@ -78,15 +73,15 @@ fi
 echo "📜 [5/10] Estas son las versiones de Ruby disponibles:"
 rbenv install --list
 
-# 7. Solicitar versión con opción por defecto automática
-echo
+# 7. Solicitar versión con ayuda visual
 ruby_latest=$(rbenv install -l | grep -E '^\s*[0-9]+\.[0-9]+\.[0-9]+$' | tail -1 | tr -d ' ')
 
+echo
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "🎯 ¡Atención! Se ha detectado que la última versión estable disponible es: $ruby_latest"
 echo
-echo "🧠 Puedes escribir una versión específica para instalarla (por ejemplo: 3.1.4)"
-echo "👉 O simplemente presiona ENTER para instalar la última versión estable mostrada arriba."
+echo "🧠 Puedes escribir una versión específica (ej: 3.1.4)"
+echo "👉 O simplemente presiona ENTER para instalar la versión: $ruby_latest"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 read_prompt "¿Qué versión de Ruby deseas instalar?: " ruby_version
 echo
@@ -98,7 +93,7 @@ else
   echo "📥 Se instalará Ruby $ruby_version según tu elección."
 fi
 
-# 8. Instalar la versión seleccionada
+# 8. Instalar Ruby
 echo "⬇️ [6/10] Instalando Ruby $ruby_version..."
 rbenv install "$ruby_version"
 rbenv global "$ruby_version"
@@ -115,14 +110,14 @@ echo "🔁 [9/10] Actualizando RubyGems..."
 gem update --system
 
 # 11. Instrucciones futuras
-echo "🛠️ [10/10] Para actualizar rbenv y ruby-build en el futuro:"
+echo "🛠️ [10/10] Para actualizar rbenv y ruby-build:"
 echo "cd ~/.rbenv && git pull"
 echo "cd \"\$(rbenv root)/plugins/ruby-build\" && git pull"
 
 echo
 echo "🎉 Ruby $ruby_version ha sido instalado y configurado exitosamente con rbenv."
 
-# 12. Recargar terminal automáticamente
+# 12. Recargar terminal
 echo
 echo "🔄 Recargando terminal para aplicar cambios..."
-exec $SHELL
+exec "$SHELL"
