@@ -1,4 +1,4 @@
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 set -e
 
 # Script para instalar y configurar Python en Ubuntu con pyenv
@@ -40,11 +40,9 @@ fi
 
 # 3. Agregar configuración a archivos de entorno
 echo "🧩 [2/10] Agregando configuración de pyenv a archivos de entorno..."
-
 for config_file in "$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile" "$HOME/.zprofile"; do
-  if [ ! -f "$config_file" ]; then
-    touch "$config_file"
-  fi
+  [ ! -f "$config_file" ] && touch "$config_file"
+
   if ! grep -q 'pyenv init' "$config_file"; then
     {
       echo ''
@@ -67,15 +65,11 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init --path)"
 eval "$(pyenv init -)"
 
-# 5. Mostrar versiones disponibles
-echo "📜 [4/10] Estas son las versiones de Python disponibles:"
-pyenv install --list
-
-# 6. Mostrar versiones disponibles
-echo "📜 [4/10] Estas son algunas versiones de Python disponibles:"
+# 5. Mostrar algunas versiones disponibles
+echo "📜 [4/10] Estas son algunas versiones recientes de Python disponibles:"
 pyenv install -l | grep -E '^\s*[0-9]+\.[0-9]+\.[0-9]+$' | tail -n 20
 
-# 7. Solicitar versión con ayuda visual
+# 6. Solicitar versión con ayuda visual
 python_latest=$(pyenv install -l | grep -E '^\s*[0-9]+\.[0-9]+\.[0-9]+$' | tail -1 | tr -d ' ')
 
 echo
@@ -95,28 +89,28 @@ else
   echo "📥 Se instalará Python $python_version según tu elección."
 fi
 
-# 8. Instalar y establecer versión global
+# 7. Instalar y establecer versión global
 echo "⬇️ [5/10] Instalando Python $python_version..."
 pyenv install "$python_version"
 pyenv global "$python_version"
 
-# 9. Verificar instalación
+# 8. Verificar instalación
 echo "🔍 [6/10] Verificando instalación..."
 python --version
 
-# 10. Instalar pip y paquetes básicos
+# 9. Instalar pip y paquetes básicos
 echo "📦 [7/10] Instalando pip y herramientas esenciales..."
 curl -sS https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python get-pip.py
 rm get-pip.py
 pip install --upgrade pip setuptools wheel
 
-# 11. Instrucciones futuras
+# 10. Instrucciones futuras
 echo "🛠️ [8/10] Para actualizar pyenv en el futuro:"
 echo "cd ~/.pyenv && git pull"
 
-# 12. Recargar shell para aplicar los cambios
+# 11. Recargar terminal
 echo
 echo "🔄 Recargando la terminal para aplicar todos los cambios..."
 echo "💡 Una vez reiniciado, puedes verificar con: python --version"
-exec $SHELL
+exec "$SHELL"
