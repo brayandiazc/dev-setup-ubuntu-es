@@ -1,6 +1,8 @@
 # ⚙️ dev-setup-ubuntu-es
 
-Instaladores automatizados para configurar un entorno completo de desarrollo en Ubuntu o WSL, usando herramientas modernas y gestionadas por versión: `zsh`, `git`, `ssh`, `ruby`, `node`, `python`, `postgresql`, `docker`, `kubernetes`, `terraform`.
+Instaladores automatizados para configurar un entorno completo de desarrollo en Ubuntu o WSL, usando herramientas modernas y gestionadas por versión: `zsh`, `git`, `ssh`, `node`, `python`, `ruby`, `java`, `postgresql`, `docker`, `terraform`, `kubernetes`.
+
+> El orden de los scripts sigue la saga de entornos de desarrollo de [brayandiazc.com](https://brayandiazc.com), donde cada herramienta tiene su artículo paso a paso.
 
 Proyecto modular y ordenado que permite instalar y configurar cada tecnología paso a paso con scripts independientes, seguros y comentados.
 
@@ -15,13 +17,14 @@ Proyecto modular y ordenado que permite instalar y configurar cada tecnología p
     ├── 03-configurar-zsh.sh
     ├── 04-instalar-git.sh
     ├── 05-instalar-ssh.sh
-    ├── 06-instalar-ruby.sh
-    ├── 07-instalar-node.sh
-    ├── 08-instalar-python.sh
-    ├── 09-instalar-postgresql.sh
-    ├── 10-instalar-docker.sh
-    ├── 11-instalar-kubernetes.sh
-    └── 12-instalar-terraform.sh
+    ├── 06-instalar-node.sh
+    ├── 07-instalar-python.sh
+    ├── 08-instalar-ruby.sh
+    ├── 09-instalar-java.sh
+    ├── 10-instalar-postgresql.sh
+    ├── 11-instalar-docker.sh
+    ├── 12-instalar-terraform.sh
+    └── 13-instalar-kubernetes.sh
 ```
 
 ## ⚙️ Requisitos
@@ -58,13 +61,14 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 ./scripts/03-configurar-zsh.sh
 ./scripts/04-instalar-git.sh
 ./scripts/05-instalar-ssh.sh
-./scripts/06-instalar-ruby.sh
-./scripts/07-instalar-node.sh
-./scripts/08-instalar-python.sh
-./scripts/09-instalar-postgresql.sh
-./scripts/10-instalar-docker.sh
-./scripts/11-instalar-kubernetes.sh
+./scripts/06-instalar-node.sh
+./scripts/07-instalar-python.sh
+./scripts/08-instalar-ruby.sh
+./scripts/09-instalar-java.sh
+./scripts/10-instalar-postgresql.sh
+./scripts/11-instalar-docker.sh
 ./scripts/12-instalar-terraform.sh
+./scripts/13-instalar-kubernetes.sh
 ```
 
 ## 🔎 Scripts incluidos
@@ -76,13 +80,14 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 | 03  | `configurar-zsh.sh`      | Instala Oh My Zsh + plugins (tras reiniciar terminal)           | [Oh My Zsh](https://ohmyz.sh/)             |
 | 04  | `instalar-git.sh`        | Instala Git y configura usuario, correo, y plantilla de commit  | [Git](https://git-scm.com/)                |
 | 05  | `instalar-ssh.sh`        | Genera claves SSH para autenticación con GitHub                 | [SSH](https://www.openssh.com/)            |
-| 06  | `instalar-ruby.sh`       | Instala Ruby usando `rbenv` con versión seleccionable           | [rbenv](https://github.com/rbenv/rbenv)    |
-| 07  | `instalar-node.sh`       | Instala Node.js usando `nodenv` con versión estable por defecto | [nodenv](https://github.com/nodenv/nodenv) |
-| 08  | `instalar-python.sh`     | Instala Python con `pyenv` y paquetes esenciales                | [pyenv](https://github.com/pyenv/pyenv)    |
-| 09  | `instalar-postgresql.sh` | Instala PostgreSQL desde el repositorio oficial (v16/v17)       | [PostgreSQL](https://www.postgresql.org/)  |
-| 10  | `instalar-docker.sh`     | Instala Docker y Docker Compose                                 | [Docker](https://docs.docker.com/)         |
-| 11  | `instalar-kubernetes.sh` | Instala kubectl y minikube para desarrollo local                | [Kubernetes](https://kubernetes.io/)       |
+| 06  | `instalar-node.sh`       | Instala Node.js usando `nodenv` con versión estable por defecto | [nodenv](https://github.com/nodenv/nodenv) |
+| 07  | `instalar-python.sh`     | Instala Python con `pyenv` y paquetes esenciales                | [pyenv](https://github.com/pyenv/pyenv)    |
+| 08  | `instalar-ruby.sh`       | Instala Ruby usando `rbenv` con versión seleccionable           | [rbenv](https://github.com/rbenv/rbenv)    |
+| 09  | `instalar-java.sh`       | Instala Java (LTS) con SDKMAN!                                  | [SDKMAN!](https://sdkman.io/)              |
+| 10  | `instalar-postgresql.sh` | Instala PostgreSQL desde el repositorio oficial                 | [PostgreSQL](https://www.postgresql.org/)  |
+| 11  | `instalar-docker.sh`     | Instala Docker y Docker Compose                                 | [Docker](https://docs.docker.com/)         |
 | 12  | `instalar-terraform.sh`  | Instala Terraform desde repositorio oficial de HashiCorp        | [Terraform](https://www.terraform.io/)     |
+| 13  | `instalar-kubernetes.sh` | Instala kubectl y minikube para desarrollo local                | [Kubernetes](https://kubernetes.io/)       |
 
 ## 📋 Funcionalidades detalladas por script
 
@@ -128,17 +133,7 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 - Proporciona instrucciones para añadir la clave a GitHub
 - Prueba la conexión SSH con GitHub
 
-### 💎 **06-instalar-ruby.sh**
-
-- Instala dependencias necesarias para compilar Ruby
-- Instala `rbenv` para gestión de versiones
-- Configura `rbenv` en todos los archivos de entorno (.bashrc, .zshrc, .profile, .zprofile)
-- Instala `ruby-build` plugin
-- Permite seleccionar versión específica de Ruby
-- Instala Bundler y actualiza RubyGems
-- Proporciona instrucciones para actualizar rbenv
-
-### 🟢 **07-instalar-node.sh**
+### 🟢 **06-instalar-node.sh**
 
 - Instala dependencias necesarias para compilar Node.js
 - Instala `nodenv` para gestión de versiones
@@ -148,7 +143,7 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 - Verifica la instalación con `node -v` y `npm -v`
 - Proporciona instrucciones para actualizar nodenv
 
-### 🐍 **08-instalar-python.sh**
+### 🐍 **07-instalar-python.sh**
 
 - Instala dependencias necesarias para compilar Python
 - Instala `pyenv` para gestión de versiones
@@ -158,7 +153,25 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 - Actualiza pip al último nivel
 - Proporciona instrucciones para actualizar pyenv
 
-### 🐘 **09-instalar-postgresql.sh**
+### 💎 **08-instalar-ruby.sh**
+
+- Instala dependencias necesarias para compilar Ruby
+- Instala `rbenv` para gestión de versiones
+- Configura `rbenv` en todos los archivos de entorno (.bashrc, .zshrc, .profile, .zprofile)
+- Instala `ruby-build` plugin
+- Permite seleccionar versión específica de Ruby
+- Instala Bundler y actualiza RubyGems
+- Proporciona instrucciones para actualizar rbenv
+
+### ☕ **09-instalar-java.sh**
+
+- Instala dependencias necesarias (curl, zip, unzip)
+- Instala SDKMAN! si no existe
+- Instala Java LTS (distribución Temurin por defecto)
+- Verifica con `java -version`, `javac -version` y `sdk current java`
+- Indica cómo instalar otras versiones, Maven y Gradle
+
+### 🐘 **10-instalar-postgresql.sh**
 
 - Permite seleccionar versión específica de PostgreSQL (por defecto v17)
 - Añade repositorio oficial de PostgreSQL
@@ -169,7 +182,7 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 - Prueba la conexión local
 - Proporciona recomendaciones adicionales
 
-### 🐳 **10-instalar-docker.sh**
+### 🐳 **11-instalar-docker.sh**
 
 - Detecta automáticamente si está en WSL con Docker Desktop
 - Elimina versiones antiguas de Docker si existen
@@ -180,15 +193,6 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 - Añade usuario al grupo docker
 - Verifica la instalación
 
-### ☸️ **11-instalar-kubernetes.sh**
-
-- Descarga e instala `kubectl` versión específica (v1.30.1)
-- Descarga e instala `minikube` para desarrollo local
-- Da permisos de ejecución a ambos binarios
-- Mueve los binarios a `/usr/local/bin`
-- Verifica las instalaciones
-- Proporciona comando para iniciar clúster local
-
 ### 🌍 **12-instalar-terraform.sh**
 
 - Actualiza el sistema
@@ -197,6 +201,15 @@ chmod +x scripts/*.sh  # Otorga permisos de ejecución a todos los scripts
 - Configura repositorio oficial de HashiCorp
 - Instala Terraform desde repositorio oficial
 - Verifica la instalación
+
+### ☸️ **13-instalar-kubernetes.sh**
+
+- Descarga e instala `kubectl` versión específica (v1.30.1)
+- Descarga e instala `minikube` para desarrollo local
+- Da permisos de ejecución a ambos binarios
+- Mueve los binarios a `/usr/local/bin`
+- Verifica las instalaciones
+- Proporciona comando para iniciar clúster local
 
 ## 🧪 Recomendación de uso
 
@@ -208,11 +221,11 @@ También puedes ejecutar solo los que necesites de forma independiente.
 1. **Base**: `01-instalacion-base.sh`
 2. **Shell**: `02-instalar-zsh.sh` → Reiniciar terminal → `03-configurar-zsh.sh`
 3. **Control de versiones**: `04-instalar-git.sh` → `05-instalar-ssh.sh`
-4. **Lenguajes**: `06-instalar-ruby.sh` → `07-instalar-node.sh` → `08-instalar-python.sh`
-5. **Base de datos**: `09-instalar-postgresql.sh`
-6. **Contenedores**: `10-instalar-docker.sh`
-7. **Orquestación**: `11-instalar-kubernetes.sh`
-8. **Infraestructura**: `12-instalar-terraform.sh`
+4. **Lenguajes**: `06-instalar-node.sh` → `07-instalar-python.sh` → `08-instalar-ruby.sh` → `09-instalar-java.sh`
+5. **Base de datos**: `10-instalar-postgresql.sh`
+6. **Contenedores**: `11-instalar-docker.sh`
+7. **Infraestructura**: `12-instalar-terraform.sh`
+8. **Orquestación**: `13-instalar-kubernetes.sh`
 
 ## 🔗 Enlaces útiles
 
@@ -224,6 +237,7 @@ También puedes ejecutar solo los que necesites de forma independiente.
 - [rbenv](https://github.com/rbenv/rbenv) - Gestor de versiones de Ruby
 - [nodenv](https://github.com/nodenv/nodenv) - Gestor de versiones de Node.js
 - [pyenv](https://github.com/pyenv/pyenv) - Gestor de versiones de Python
+- [SDKMAN!](https://sdkman.io/) - Gestor del ecosistema Java
 - [PostgreSQL](https://www.postgresql.org/) - Base de datos relacional
 - [Docker](https://docs.docker.com/) - Contenedores
 - [Kubernetes](https://kubernetes.io/) - Orquestación de contenedores
