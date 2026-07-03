@@ -57,5 +57,5 @@ infraestructura.
 
 ## Inventario de scripts
 
-Ver la tabla completa en el [README](../../README.md#-scripts-incluidos) y el
+Ver la tabla completa en el [README](../../README.md#scripts-disponibles) y el
 detalle de tecnologías en [`stack.md`](stack.md).

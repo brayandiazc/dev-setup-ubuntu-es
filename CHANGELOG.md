@@ -19,6 +19,19 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 
 ### Security
 
+## [1.1.0] - 2026-07-03
+
+### Added
+
+- ADR `0004-fuentes-de-instalacion-oficiales.md` (repositorios/PPA/GPG).
+
+### Changed
+
+- README reescrito al estilo de la plantilla (encabezados limpios, secciones
+  Descripción/Características/Uso y tabla de contenidos completa), alineado con el
+  repo hermano [`dev-setup-mac-es`](https://github.com/brayandiazc/dev-setup-mac-es)
+  para mantenerlos como espejo.
+
 ## [1.0.0] - 2026-07-03
 
 ### Added
@@ -45,8 +58,6 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - Normalizado el shebang de los scripts a `#!/usr/bin/env bash`
   (`11-instalar-docker.sh` usaba `zsh`; `04` y `05` usaban una ruta no portable).
 
-<!--
-Enlaces de comparación entre versiones:
-[Unreleased]: https://github.com/brayandiazc/dev-setup-ubuntu-es/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/brayandiazc/dev-setup-ubuntu-es/compare/v1.1.0...HEAD
+[1.1.0]: https://github.com/brayandiazc/dev-setup-ubuntu-es/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/brayandiazc/dev-setup-ubuntu-es/releases/tag/v1.0.0
--->

@@ -34,3 +34,4 @@ nuevo que reemplace al anterior.
 | [0001](0001-record-architecture-decisions.md)                        | Registrar las decisiones de arquitectura           | Aceptada |
 | [0002](0002-gestores-de-version-para-lenguajes.md)                   | Usar gestores de versión para instalar lenguajes   | Aceptada |
 | [0003](0003-un-script-por-herramienta.md)                            | Un script independiente por herramienta            | Aceptada |
+| [0004](0004-fuentes-de-instalacion-oficiales.md)                     | Instalar desde fuentes oficiales (repos/PPA/GPG)   | Aceptada |
