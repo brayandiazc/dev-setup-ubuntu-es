@@ -21,3 +21,6 @@ jobs:
         with:
           scandir: "./scripts"
           additional_files: ".github/scripts/setup-labels.sh"
+          # Falla solo ante errores reales; las notas/avisos de estilo
+          # (p. ej. comillas simples intencionales al escribir en .zshrc) no bloquean.
+          severity: error

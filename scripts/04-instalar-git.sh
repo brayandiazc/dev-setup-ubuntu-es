@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/usr/bin/env bash
 set -e
 
 # Script para instalar y configurar Git en Ubuntu/WSL
