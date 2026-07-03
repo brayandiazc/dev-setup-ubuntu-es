@@ -40,6 +40,11 @@ y este proyecto adhiere a [Semantic Versioning](https://semver.org/lang/es/).
 - README reescrito alineado a la estructura de la plantilla (tabla de contenidos,
   badges, enlaces de gobernanza y sección de versionado).
 
+### Fixed
+
+- Normalizado el shebang de los scripts a `#!/usr/bin/env bash`
+  (`11-instalar-docker.sh` usaba `zsh`; `04` y `05` usaban una ruta no portable).
+
 <!--
 Enlaces de comparación entre versiones:
 [Unreleased]: https://github.com/brayandiazc/dev-setup-ubuntu-es/compare/v1.0.0...HEAD
