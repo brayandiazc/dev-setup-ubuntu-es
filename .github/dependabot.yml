@@ -1,0 +1,23 @@
+# ==============================================================================
+# Configuración de Dependabot
+# ==============================================================================
+# Este repositorio no tiene dependencias empaquetadas; lo único versionable son
+# las GitHub Actions usadas en los workflows de CI.
+# Documentación: https://docs.github.com/code-security/dependabot/dependabot-version-updates
+# ==============================================================================
+
+version: 2
+
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "ci-cd"
+    commit-message:
+      prefix: "chore"
+      include: "scope"

@@ -1,0 +1,32 @@
+# Auto-etiquetado de Pull Requests según los archivos modificados.
+# Requiere un workflow que ejecute actions/labeler (ver workflows/README.md).
+
+documentation:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "**/*.md"
+      - "docs/**/*"
+      - ".github/ISSUE_TEMPLATE/**/*"
+      - ".github/PULL_REQUEST_TEMPLATE.md"
+
+scripts:
+  - changed-files:
+    - any-glob-to-any-file:
+      - "scripts/**/*"
+
+config:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ".editorconfig"
+      - ".gitignore"
+
+ci-cd:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ".github/workflows/**/*"
+      - ".github/dependabot.yml"
+
+github:
+  - changed-files:
+    - any-glob-to-any-file:
+      - ".github/**/*"
